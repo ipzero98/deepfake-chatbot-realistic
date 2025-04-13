@@ -66,3 +66,23 @@ button {
   50% { opacity: 0.7; }
   100% { opacity: 1; }
 }
+/* 추가/수정된 부분 */
+#chat-container {
+  max-width: 100%;
+  height: 100vh;
+  border-radius: 0;
+}
+
+@media (min-width: 768px) {
+  #chat-container {
+    max-width: 800px;
+    height: 90vh;
+    margin: 20px auto;
+    border-radius: 15px;
+  }
+}
+
+#send-btn {
+  padding: 12px 15px;
+  white-space: nowrap;
+}

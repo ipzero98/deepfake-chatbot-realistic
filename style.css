@@ -1,0 +1,68 @@
+body {
+  font-family: 'Arial', sans-serif;
+  background: #121212;
+  color: #f0f0f0;
+  margin: 0;
+  padding: 0;
+}
+#chat-container {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  width: 100%;
+  max-width: 600px;
+  margin: auto;
+  background: #1e1e1e;
+  padding: 10px;
+}
+#chat-box {
+  flex: 1;
+  overflow-y: auto;
+  margin-bottom: 10px;
+}
+.chat-message {
+  margin: 10px 0;
+}
+.chatbot {
+  color: #9ecfff;
+}
+.user {
+  color: #ffd1dc;
+  text-align: right;
+}
+#input-container {
+  display: flex;
+}
+#user-input {
+  flex: 1;
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+}
+button {
+  padding: 10px;
+  background-color: #2979ff;
+  border: none;
+  color: white;
+  cursor: pointer;
+  border-radius: 5px;
+}
+/* (기존 코드 유지) */
+#info-box {
+  background: #ff000033;
+  border-left: 4px solid #ff6b6b;
+  padding: 8px;
+  margin-bottom: 15px;
+  font-size: 0.9em;
+}
+
+.emergency {
+  animation: blink 1s infinite;
+  border: 2px solid red !important;
+}
+
+@keyframes blink {
+  0% { opacity: 1; }
+  50% { opacity: 0.7; }
+  100% { opacity: 1; }
+}

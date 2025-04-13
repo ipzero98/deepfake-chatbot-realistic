@@ -2,33 +2,17 @@
 <html lang="ko">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>딥페이크 피해 시뮬레이션 (접근성 검증 완료)</title>
-  <meta name="description" content="딥페이크 피해 대처법을 체험하는 시뮬레이션">
+  <title>딥페이크 피해 시뮬레이션</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <main id="chat-container" aria-live="polite">
-    <h1>딥페이크 피해 시뮬레이션</h1>
-    
-    <!-- 시나리오 진행 영역 -->
-    <div id="chat-box" role="log" aria-atomic="false"></div>
-    
-    <!-- 입력 영역 (접근성 개선) -->
+  <div id="chat-container">
+    <div id="chat-box"></div>
     <div id="input-area">
-      <label for="user-input" class="sr-only">메시지 입력</label>
-      <input 
-        type="text" 
-        id="user-input" 
-        placeholder="메시지를 입력하세요..."
-        aria-required="true"
-      >
-      <button 
-        id="send-btn"
-        aria-label="메시지 전송"
-      >전송</button>
+      <input type="text" id="user-input" placeholder="메시지 입력...">
+      <button id="send-btn">전송</button>
     </div>
-  </main>
+  </div>
   <script src="script.js"></script>
 </body>
 </html>

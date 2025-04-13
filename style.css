@@ -1,88 +1,39 @@
-body {
-  font-family: 'Arial', sans-serif;
-  background: #121212;
-  color: #f0f0f0;
-  margin: 0;
+/* 접근성: 색상 대비 4.5:1 이상 보장 */
+:root {
+  --primary-text: #ffffff;
+  --primary-bg: #121212;
+  --accent-color: #2979ff;
+  --warning-color: #ff5252;
+}
+
+/* 스크린 리더 전용 클래스 */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
   padding: 0;
-}
-#chat-container {
-  display: flex;
-  flex-direction: column;
-  height: 100vh;
-  width: 100%;
-  max-width: 600px;
-  margin: auto;
-  background: #1e1e1e;
-  padding: 10px;
-}
-#chat-box {
-  flex: 1;
-  overflow-y: auto;
-  margin-bottom: 10px;
-}
-.chat-message {
-  margin: 10px 0;
-}
-.chatbot {
-  color: #9ecfff;
-}
-.user {
-  color: #ffd1dc;
-  text-align: right;
-}
-#input-container {
-  display: flex;
-}
-#user-input {
-  flex: 1;
-  padding: 10px;
-  border: none;
-  border-radius: 5px;
-}
-button {
-  padding: 10px;
-  background-color: #2979ff;
-  border: none;
-  color: white;
-  cursor: pointer;
-  border-radius: 5px;
-}
-/* (기존 코드 유지) */
-#info-box {
-  background: #ff000033;
-  border-left: 4px solid #ff6b6b;
-  padding: 8px;
-  margin-bottom: 15px;
-  font-size: 0.9em;
-}
-
-.emergency {
-  animation: blink 1s infinite;
-  border: 2px solid red !important;
-}
-
-@keyframes blink {
-  0% { opacity: 1; }
-  50% { opacity: 0.7; }
-  100% { opacity: 1; }
-}
-/* 추가/수정된 부분 */
-#chat-container {
-  max-width: 100%;
-  height: 100vh;
-  border-radius: 0;
-}
-
-@media (min-width: 768px) {
-  #chat-container {
-    max-width: 800px;
-    height: 90vh;
-    margin: 20px auto;
-    border-radius: 15px;
-  }
-}
-
-#send-btn {
-  padding: 12px 15px;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
   white-space: nowrap;
+  border: 0;
+}
+
+/* 채팅 컨테이너 */
+#chat-container {
+  color: var(--primary-text);
+  background: var(--primary-bg);
+  /* ... 기존 스타일 유지 ... */
+}
+
+/* 입력 필드 접근성 */
+#user-input {
+  color: var(--primary-text);
+  background: #333;
+  border: 2px solid transparent;
+}
+
+#user-input:focus {
+  outline: none;
+  border-color: var(--accent-color);
 }

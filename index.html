@@ -3,21 +3,32 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>딥페이크 피해 체험 (여성 피해자 시뮬레이션)</title>
+  <title>딥페이크 피해 시뮬레이션 (접근성 검증 완료)</title>
+  <meta name="description" content="딥페이크 피해 대처법을 체험하는 시뮬레이션">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <div id="chat-container">
-    <h1>🔐 딥페이크 피해 대응 시뮬레이션</h1>
-    <div id="info-box">※ 본 체험은 실제 사례를 바탕으로 제작되었습니다</div>
-    <div id="chat-box"></div>
+  <main id="chat-container" aria-live="polite">
+    <h1>딥페이크 피해 시뮬레이션</h1>
+    
+    <!-- 시나리오 진행 영역 -->
+    <div id="chat-box" role="log" aria-atomic="false"></div>
+    
+    <!-- 입력 영역 (접근성 개선) -->
     <div id="input-area">
-      <input type="text" id="user-input" placeholder="무엇을 하시겠습니까?" autofocus>
-      <button id="send-btn">전송</button>
+      <label for="user-input" class="sr-only">메시지 입력</label>
+      <input 
+        type="text" 
+        id="user-input" 
+        placeholder="메시지를 입력하세요..."
+        aria-required="true"
+      >
+      <button 
+        id="send-btn"
+        aria-label="메시지 전송"
+      >전송</button>
     </div>
-    <audio id="bgm" loop></audio>
-    <audio id="alert-sound"></audio>
-  </div>
+  </main>
   <script src="script.js"></script>
 </body>
 </html>

@@ -1,69 +1,65 @@
-// 시나리오 데이터
-const scenario = [
-  { role: "chatbot", text: "안녕하세요! 딥페이크 피해 시뮬레이션을 시작합니다." },
-  { role: "chatbot", text: "가상의 상황이지만 현실감 있게 체험해주세요." },
-  { role: "chatbot", text: "지금부터 가상의 시나리오가 시작됩니다..." },
-  { role: "chatbot", text: "(전 남자친구): 미영아, 오랜만이야. 사진 하나 보내줄 수 있을까?" },
-  { role: "chatbot", text: "어떻게 답하시겠습니까?", options: ["1. 사진 보내기", "2. 거절하기"] }
+
+const chatBox = document.getElementById("chat-box");
+const userInput = document.getElementById("user-input");
+
+let stage = 0;
+
+const story = [
+  { role: "chatbot", text: "안녕! 오늘 하루 어땠어?" },
+  { role: "chatbot", text: "너 요즘 많이 힘들어 보이더라. 나랑 얘기해볼래?" },
+  { role: "chatbot", text: "네 사진 진짜 잘 나왔더라~ 하나만 보내줄래?" },
+  { role: "chatbot", text: "이거 봐, 네 얼굴로 영상 만들어봤어. 진짜 같지 않아?" },
+  { role: "chatbot", text: "이미 단톡방에 뿌렸는데 반응 장난 아냐. 넌 날 못 막아." },
+  { role: "chatbot", text: "이제 어떻게 할래? [신고하기 / 친구에게 말하기 / 혼자 감추기] 중에 골라줘." },
 ];
 
-// 엔딩 데이터
 const endings = {
-  "1": "⚠️ 가해자가 사진을 악용해 딥페이크 영상 제작 후 협박했습니다.",
-  "2": "✅ 안전하게 상황을 피했습니다. 경찰에 신고하는 것이 좋습니다."
+  "신고하기": "신고가 접수되었습니다. 수사에 착수합니다. 가해자는 결국 처벌받았습니다.",
+  "친구에게 말하기": "친구가 함께해줬고, 전문가 도움을 받을 수 있었어요. 당신은 혼자가 아닙니다.",
+  "혼자 감추기": "당신은 혼자 감당했고, 영상은 더 퍼졌습니다. 고립감이 커져만 갔습니다."
 };
 
-// DOM 요소
-const chatBox = document.getElementById('chat-box');
-const userInput = document.getElementById('user-input');
-const sendBtn = document.getElementById('send-btn');
-
-// 상태 변수
-let currentStep = 0;
-
-// 메시지 출력 함수
 function addMessage(role, text) {
-  const div = document.createElement('div');
-  div.className = role;
-  div.textContent = text;
-  chatBox.appendChild(div);
+  const msg = document.createElement("div");
+  msg.classList.add("chat-message", role);
+  msg.innerText = text;
+  chatBox.appendChild(msg);
   chatBox.scrollTop = chatBox.scrollHeight;
+  speak(text);
 }
 
-// 시나리오 진행
-function nextStep() {
-  if (currentStep < scenario.length) {
-    const step = scenario[currentStep];
-    addMessage(step.role, step.text);
-    currentStep++;
-  } else {
-    addMessage("system", "시나리오가 종료되었습니다.");
-  }
-}
-
-// 전송 처리
 function sendMessage() {
-  const text = userInput.value.trim();
-  if (!text) return;
+  const input = userInput.value.trim();
+  if (input === "") return;
 
-  addMessage("user", text);
+  addMessage("user", input);
   userInput.value = "";
 
   setTimeout(() => {
-    if (currentStep >= scenario.length) {
-      const result = endings[text[0]] || "잘못된 선택입니다.";
-      addMessage("chatbot", result);
+    if (stage < story.length) {
+      addMessage("chatbot", story[stage].text);
+      stage++;
     } else {
-      nextStep();
+      if (endings[input]) {
+        addMessage("chatbot", endings[input]);
+      } else {
+        addMessage("chatbot", "선택지를 정확히 입력해주세요: 신고하기 / 친구에게 말하기 / 혼자 감추기");
+      }
     }
-  }, 500);
+  }, 800);
 }
 
-// 이벤트 리스너
-sendBtn.addEventListener('click', sendMessage);
-userInput.addEventListener('keypress', (e) => {
-  if (e.key === 'Enter') sendMessage();
-});
+// 음성합성 (TTS)
+function speak(text) {
+  const utter = new SpeechSynthesisUtterance(text);
+  utter.lang = 'ko-KR';
+  utter.pitch = 1;
+  utter.rate = 1;
+  speechSynthesis.speak(utter);
+}
 
-// 초기화
-nextStep();
+// 첫 메시지 자동 출력
+window.onload = () => {
+  addMessage("chatbot", story[0].text);
+  stage = 1;
+};

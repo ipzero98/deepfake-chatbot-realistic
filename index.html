@@ -2,15 +2,15 @@
 <html lang="ko">
 <head>
   <meta charset="UTF-8">
-  <title>딥페이크 피해 시뮬레이션</title>
+  <title>딥페이크 피해 체험</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
   <div id="chat-container">
     <div id="chat-box"></div>
-    <div id="input-area">
-      <input type="text" id="user-input" placeholder="메시지 입력...">
-      <button id="send-btn">전송</button>
+    <div id="input-container">
+      <input type="text" id="user-input" placeholder="입력하세요..." autofocus />
+      <button onclick="sendMessage()">전송</button>
     </div>
   </div>
   <script src="script.js"></script>
